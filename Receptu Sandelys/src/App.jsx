@@ -1,34 +1,23 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import './components/Filters';
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [Filters, setFilters] = useState({});
+
+  const handleFilterChange = (newFilters) => {
+      setFilters(newFilters);
+      console.log("Updated filters", newFilters);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Hello World
-      </p>
-    </>
+      <>
+          <div>
+              <h1 className="text-2xl font-bold p-4">Receptų Sandėlis</h1>
+              <Filters onFilterChange={handleFilterChange}/>
+              <p>Pasirinkti Filtrai: {JSON.stringify(Filters)}</p>
+          </div>
+      </>
   )
 }
 
