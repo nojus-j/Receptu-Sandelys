@@ -1,0 +1,22 @@
+.left-align {
+    text-align: left;
+}
+.center-align {
+    text-align: center;
+    font-size: smaller;
+}
+.spacing {
+    margin-bottom: 500px;
+    margin-right: 1040px;
+}
+.purple-text {
+    color: mediumpurple;
+}
+.font-small {
+    font-size: x-small;
+}
+.equal-width-label {
+    display: inline-block;
+    width: 100px;
+    text-align: left;
+}
