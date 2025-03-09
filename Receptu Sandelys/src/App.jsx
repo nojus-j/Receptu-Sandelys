@@ -6,9 +6,8 @@ import SearchBar from "./components/SearchBar.jsx"
 function App() {
   return (
       <>
-          <SearchBar />
           <CheckBoxTest />
-          <Recipe_Name />
+          <SearchBar />
           
       </>
   )
