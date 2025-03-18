@@ -21,7 +21,7 @@ const SearchBar = () => {
     setLoading(true);
     try {
       // Replace 'YOUR_API_KEY' with your actual Spoonacular API key
-      const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY;
+      const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY3;
       const formattedIngredients = ingredients
       .split(' ') // Split by commas
       .map((ingredient) => ingredient.trim()) // Trim whitespace

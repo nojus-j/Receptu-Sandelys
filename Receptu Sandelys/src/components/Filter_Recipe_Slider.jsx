@@ -30,7 +30,7 @@ const FilterRecipeSlider = () => {
   const fetchRecipes = async () => {
     setLoading(true);
     try {
-      const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY2;
+      const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY3;
 
       console.log("Fetching recipes by filters...");
 
