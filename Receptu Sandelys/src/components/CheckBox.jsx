@@ -1,105 +1,66 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./App.css";
+import React from "react";
 
-const FilterRecipeCheckbox = () => {
-    const [filters, setFilters] = useState({
-        vegan: false,
-        vegetarian: false,
-        mealType: [],
-    });
+const FilterRecipeCheckbox = ({ checkboxFilters, setCheckboxFilters }) => {
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
 
-    const [recipes, setRecipes] = useState([]);
-    const [loading, setLoading] = useState(false);
+    if (name === "vegan" || name === "vegetarian") {
+      setCheckboxFilters((prev) => ({
+        ...prev,
+        [name]: checked,
+      }));
+    } else {
+      setCheckboxFilters((prev) => ({
+        ...prev,
+        mealType: checked
+          ? [...prev.mealType, name]
+          : prev.mealType.filter((item) => item !== name),
+      }));
+    }
+  };
 
-    const handleCheckboxChange = (e) => {
-        const { name, checked } = e.target;
+  return (
+    <div className="filter-container text-center">
+      <h2 className="filter-title purple-text mb-2">Meal & Diet Filters</h2>
 
-        if (name === "vegan" || name === "vegetarian") {
-            setFilters((prevFilters) => ({
-                ...prevFilters,
-                [name]: checked,
-            }));
-        } else {
-            setFilters((prevFilters) => ({
-                ...prevFilters,
-                mealType: checked
-                    ? [...prevFilters.mealType, name]
-                    : prevFilters.mealType.filter((item) => item !== name),
-            }));
-        }
-    };
+      <div className="flex justify-center gap-6 mb-4">
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="vegan"
+            checked={checkboxFilters.vegan}
+            onChange={handleCheckboxChange}
+          />
+          Vegan
+        </label>
+        <label className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="vegetarian"
+            checked={checkboxFilters.vegetarian}
+            onChange={handleCheckboxChange}
+          />
+          Vegetarian
+        </label>
+      </div>
 
-    const fetchRecipes = async () => {
-        setLoading(true);
-        try {
-            const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY3;
+      <h3 className="text-purple-500 text-sm mb-2">Meal Type</h3>
 
-            console.log("Fetching recipes by checkboxes...");
-
-            const response = await axios.get(`https://api.spoonacular.com/recipes/complexSearch`, {
-                params: {
-                    diet: filters.vegan ? "vegan" : filters.vegetarian ? "vegetarian" : "",
-                    type: filters.mealType.join(","),
-                    number: 5,
-                    apiKey: apiKey,
-                },
-            });
-
-            console.log("API Response:", response.data);
-            setRecipes(response.data.results);
-        } catch (error) {
-            console.error("Error fetching recipes:", error);
-            alert(`API Error: ${error.response?.status || "Unknown"}`);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    useEffect(() => {
-        fetchRecipes();
-    }, [filters]);
-
-    return (
-        <div className="filter-container">
-            <h2 className="filter-title">Meal & Diet Filters</h2>
-
-            <label>
-                <input type="checkbox" name="vegan" checked={filters.vegan} onChange={handleCheckboxChange} />
-                Vegan
-            </label>
-
-            <label>
-                <input type="checkbox" name="vegetarian" checked={filters.vegetarian} onChange={handleCheckboxChange} />
-                Vegetarian
-            </label>
-
-            <h3>Meal Type</h3>
-            {["breakfast", "main course", "snack", "appetizer"].map((type) => (
-                <label key={type}>
-                    <input type="checkbox" name={type} checked={filters.mealType.includes(type)} onChange={handleCheckboxChange} />
-                    {type.charAt(0).toUpperCase() + type.slice(1)}
-                </label>
-            ))}
-
-            <h3 className="filter-title purple-text">Recipes by filters</h3>
-            {loading ? (
-                <p className="loading-text">Loading...</p>
-            ) : recipes.length > 0 ? (
-                <div className="recipe-grid">
-                    {recipes.map((recipe) => (
-                        <div key={recipe.id} className="recipe-card">
-                            <img src={recipe.image} alt={recipe.title} className="recipe-img" />
-                            <h3 className="recipe-title">{recipe.title}</h3>
-                        </div>
-                    ))}
-                </div>
-            ) : (
-                <p className="no-recipes">No recipes found.</p>
-            )}
-        </div>
-    );
+      <div className="flex flex-wrap justify-center gap-4">
+        {["breakfast", "main course", "snack", "appetizer"].map((type) => (
+          <label key={type} className="flex items-center gap-1">
+            <input
+              type="checkbox"
+              name={type}
+              checked={checkboxFilters.mealType.includes(type)}
+              onChange={handleCheckboxChange}
+            />
+            {type.charAt(0).toUpperCase() + type.slice(1)}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 export default FilterRecipeCheckbox;
-
