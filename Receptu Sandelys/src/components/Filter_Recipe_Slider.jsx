@@ -83,7 +83,7 @@ const FilterRecipeSlider = () => {
         </div>
       ))}
 
-      <button className="confirm-button" onClick={handleConfirm}>Patvirtinti filtrus</button>
+      <button className="confirm-button" onClick={handleConfirm}>Confirm filters</button>
 
       <h3 className="filter-title purple-text">Recipes by filters</h3>
       {loading ? (
