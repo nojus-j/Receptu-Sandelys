@@ -11,27 +11,18 @@ const FilterRecipeSlider = () => {
     fat: [1, 100],
   });
 
+  const [sliderValues, setSliderValues] = useState({ ...filters });
+
   const [recipes, setRecipes] = useState([]); 
   const [loading, setLoading] = useState(false);
 
-  const minValues = { 
-    carbs: 10,
-     protein: 10,
-      calories: 50,
-       fat: 1 
-    };
-  const maxValues = { 
-    carbs: 100, 
-    protein: 100,
-     calories: 800, 
-     fat: 100 
-    };
+  const minValues = { carbs: 10, protein: 10, calories: 50, fat: 1 };
+  const maxValues = { carbs: 100, protein: 100, calories: 800, fat: 100 };
 
   const fetchRecipes = async () => {
     setLoading(true);
     try {
       const apiKey = import.meta.env.VITE_SPOONACULAR_API_KEY3;
-
       console.log("Fetching recipes by filters...");
 
       const response = await axios.get(`https://api.spoonacular.com/recipes/findByNutrients`, {
@@ -64,29 +55,36 @@ const FilterRecipeSlider = () => {
   }, [filters]);
 
   const handleSliderChange = (key, values) => {
-    setFilters((prevFilters) => ({ ...prevFilters, [key]: values }));
+    setSliderValues((prev) => ({ ...prev, [key]: values }));
+  };
+
+  const handleConfirm = () => {
+    setFilters({ ...sliderValues });
   };
 
   return (
     <div className="filter-container">
       <h2 className="filter-title">Filters</h2>
-      {Object.keys(filters).map((key) => (
+      {Object.keys(sliderValues).map((key) => (
         <div key={key} className="filter-group">
           <label className="filter-label">{key.toUpperCase()}</label>
           <Range
             step={1}
             min={minValues[key]}
             max={maxValues[key]}
-            values={filters[key]}
+            values={sliderValues[key]}
             onChange={(values) => handleSliderChange(key, values)}
-            renderTrack={({ props, children }) => <div {...props} className="filter-slider">{children}</div>}
+            renderTrack={({ props, children }) => (
+              <div {...props} className="filter-slider">{children}</div>
+            )}
             renderThumb={({ props }) => <div {...props} className="filter-thumb" />}
           />
-          <p className="filter-values">{filters[key][0]} - {filters[key][1]}</p>
+          <p className="filter-values">{sliderValues[key][0]} - {sliderValues[key][1]}</p>
         </div>
       ))}
 
-      {/* Receptų rodymas */}
+      <button className="confirm-button" onClick={handleConfirm}>Patvirtinti filtrus</button>
+
       <h3 className="filter-title purple-text">Recipes by filters</h3>
       {loading ? (
         <p className="loading-text">Loading...</p>
