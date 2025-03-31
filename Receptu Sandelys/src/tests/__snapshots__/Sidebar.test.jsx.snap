@@ -1,0 +1,29 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Sidebar Component - Full Unit Tests > Test 4: Matches the snapshot 1`] = `
+<div>
+  <aside
+    class="w-64 bg-gray-500 p-4"
+  >
+    <h2
+      class="text-xl text-black font-bold"
+    >
+      Sidebar
+    </h2>
+  </aside>
+</div>
+`;
+
+exports[`Sidebar component unit tests > Test 4: Matches the snapshot 1`] = `
+<div>
+  <aside
+    class="w-64 bg-gray-500 p-4"
+  >
+    <h2
+      class="text-xl text-black font-bold"
+    >
+      Sidebar
+    </h2>
+  </aside>
+</div>
+`;

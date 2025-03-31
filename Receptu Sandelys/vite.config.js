@@ -14,4 +14,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
   },
+  coverage: {
+    reporter: ['text', 'html'], // npx vitest run --coverage
+  },
 })
