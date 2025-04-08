@@ -3,6 +3,7 @@ import FilterRecipeSlider from "./Filter_Recipe_Slider";
 import FilterRecipeCheckbox from "./CheckBox";
 import SearchBar from "./SearchBar";
 import axios from "axios";
+import Sidebar from "./Sidebar";
 
 const UnifiedRecipeSearch = () => {
   const [ingredients, setIngredients] = useState("");
@@ -71,49 +72,51 @@ const UnifiedRecipeSearch = () => {
   };
 
   return (
-    <div className="filter-container">
-      <h2 className="filter-title">Recipe Search</h2>
-
-      <SearchBar ingredients={ingredients} setIngredients={setIngredients} />
-
-      <FilterRecipeSlider
-        sliderValues={sliderValues}
-        onSliderChange={handleSliderChange}
-      />
-
-      <FilterRecipeCheckbox
-        checkboxFilters={checkboxFilters}
-        setCheckboxFilters={setCheckboxFilters}
-      />
-
-      <div className="text-center mt-4">
-        <button className="confirm-button" onClick={handleSearch}>
-          {loading ? "Loading..." : "Find Recipes"}
-        </button>
-      </div>
-
-      <h3 className="filter-title purple-text mt-6">Recipes</h3>
-      {loading ? (
-        <p className="loading-text">Loading...</p>
-    ) : recipes.length > 0 ? (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
-        {recipes.map((recipe) => (
-        <div
-            key={recipe.id}
-            className="bg-white p-4 rounded-lg shadow-md text-center"
-        >
-            <img
-              src={recipe.image}
-              alt={recipe.title}
-              className="w-full h-40 object-cover rounded-md mb-2"
+    <div className="flex min-h-screen">
+      {/* Sidebar: Contains only the filter controls */}
+      <aside className="w-84 bg-gray-500">
+        <h2 className="text-xl text-black font-bold mb-4">Filters</h2>
+        <FilterRecipeSlider
+          sliderValues={sliderValues}
+          onSliderChange={handleSliderChange}
         />
-        <h3 className="text-sm font-semibold">{recipe.title}</h3>
-      </div>
-    ))}
-  </div>
-  ) : (
-  <p className="no-recipes">No recipes found.</p>
-    )}
+        <FilterRecipeCheckbox
+          checkboxFilters={checkboxFilters}
+          setCheckboxFilters={setCheckboxFilters}
+        />
+      </aside>
+      {/* Main Content: Contains the search bar, button, and recipe results */}
+      <main className="flex-1 p-4">
+        <h2 className="filter-title">Recipe Search</h2>
+        <SearchBar ingredients={ingredients} setIngredients={setIngredients} />
+        <div className="text-center mt-4">
+          <button className="confirm-button" onClick={handleSearch}>
+            {loading ? "Loading..." : "Find Recipes"}
+          </button>
+        </div>
+        <h3 className="filter-title purple-text mt-6">Recipes</h3>
+        {loading ? (
+          <p className="loading-text">Loading...</p>
+        ) : recipes.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+            {recipes.map((recipe) => (
+              <div
+                key={recipe.id}
+                className="bg-white p-4 rounded-lg shadow-md text-center"
+              >
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  className="w-full h-40 object-cover rounded-md mb-2"
+                />
+                <h3 className="text-sm font-semibold">{recipe.title}</h3>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="no-recipes">No recipes found.</p>
+        )}
+      </main>
     </div>
   );
 };

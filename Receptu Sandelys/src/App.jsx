@@ -12,14 +12,17 @@ function App() {
   return (
     <>
       <Header />
+      <UnifiedRecipeSearch />
+    </>
+  );
+}
+
+{/* <Header />
       <div className="flex min-h-screen">
         <Sidebar />
         <div className="flex-1 p-4">
          <UnifiedRecipeSearch />
         </div>
-      </div>
-    </>
-  );
-}
+      </div> */}
 
 export default App;
