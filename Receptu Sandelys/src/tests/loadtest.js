@@ -2,25 +2,22 @@ import http from 'k6/http';
 import { check, sleep } from 'k6';
 
 export const options = {
-  vus: 1000,
-  duration: '5s',
+  vus: 5,           // Tik 5 virtualūs naudotojai
+  duration: '10s',  // Tik 10 sekundžių
 };
 
-const BASE_URL = __ENV.BASE_URL || 'http://localhost:3001';
+const API_KEY = __ENV.SPOONACULAR_API_KEY;
+const BASE_URL = 'https://api.spoonacular.com/recipes/complexSearch';
 
 export default function () {
-  const res = http.get(`${BASE_URL}/recipes`);
+  const url = `${BASE_URL}?apiKey=${API_KEY}&query=chicken&number=3`;
 
-  const isSuccessful = check(res, {
+  const res = http.get(url);
+
+  check(res, {
     'status is 200': (r) => r.status === 200,
+    'body includes results': (r) => r.body.includes('results'),
   });
 
-  // Tik jei atsakymas buvo sėkmingas, tikrinam body turinį
-  if (isSuccessful && res.body) {
-    check(res, {
-      'body has recipe data': (r) => r.body.includes('Mock Recipe'),
-    });
-  }
-
-  sleep(1);
+  sleep(1); // Priverstinis laukimas, kad neperkrautų
 }

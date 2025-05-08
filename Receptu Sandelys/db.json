@@ -1,7 +1,0 @@
-{
-    "recipes": [
-      { "id": 1, "title": "Mock Recipe One", "image": "img1.jpg" },
-      { "id": 2, "title": "Mock Recipe Two", "image": "img2.jpg" },
-      { "id": 3, "title": "Mock Recipe Three", "image": "img3.jpg" }
-    ]
-  }
