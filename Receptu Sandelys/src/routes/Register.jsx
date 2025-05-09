@@ -2,32 +2,38 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
+      await axios.post("http://localhost:5000/api/register", {
         username,
         password,
       });
-
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("username", response.data.username);
-      navigate("/dashboard"); // Redirect to dashboard after login
+      setSuccess(true);
+      setError("");
+      setTimeout(() => navigate("/login"), 2000); // Redirect to login after successful registration
     } catch (err) {
-      setError("Invalid username or password");
+      setError(err.response?.data || "Registration failed");
+      setSuccess(false);
     }
   };
 
   return (
-    <div className="login-container">
-      <h2>Login</h2>
+    <div className="register-container">
+      <h2>Register</h2>
       {error && <p className="error">{error}</p>}
+      {success && (
+        <p className="success">
+          Registration successful! Redirecting to login...
+        </p>
+      )}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Username:</label>
@@ -47,11 +53,10 @@ function Login() {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
     </div>
   );
 }
 
-export default Login;
-
+export default Register;
