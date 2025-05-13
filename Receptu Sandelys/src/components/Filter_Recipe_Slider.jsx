@@ -7,7 +7,7 @@ const FilterRecipeSlider = ({ sliderValues, onSliderChange }) => {
 
   return (
     <div className="filter-container">
-      <h2 className="filter-title">Filters</h2>
+      <h2 className="filter-title"></h2>
       {Object.keys(sliderValues).map((key) => (
         <div key={key} className="filter-group mb-6">
           <label className="filter-label font-semibold">{key.toUpperCase()}</label>

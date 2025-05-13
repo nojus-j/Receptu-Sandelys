@@ -27,7 +27,7 @@ function Register() {
 
   return (
     <div className="register-container">
-      <h2>Register</h2>
+      <h2 className="login-title">Registracija</h2>
       {error && <p className="error">{error}</p>}
       {success && (
         <p className="success">
@@ -36,24 +36,40 @@ function Register() {
       )}
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username:</label>
+          <label></label>
           <input
             type="text"
             value={username}
+            placeholder="Vartotojo vardas"
             onChange={(e) => setUsername(e.target.value)}
             required
+            style={{
+              border: "2px solid black",
+              borderRadius: "6px",
+              padding: "0.5rem",
+              fontSize: "1rem",
+              outline: "none"
+            }}
           />
         </div>
-        <div>
-          <label>Password:</label>
+        <div style={{ marginTop: "1rem" }}>
+          <label></label>
           <input
             type="password"
             value={password}
+            placeholder="Slaptažodis"
             onChange={(e) => setPassword(e.target.value)}
             required
+            style={{
+              border: "2px solid black",
+              borderRadius: "6px",
+              padding: "0.5rem",
+              fontSize: "1rem",
+              outline: "none"
+            }}
           />
         </div>
-        <button type="submit">Register</button>
+        <button className="violet-button" type="submit">Registruotis</button>
       </form>
     </div>
   );

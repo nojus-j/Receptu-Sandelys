@@ -118,3 +118,26 @@
     color: #777;
   }
   
+  .violet-button {
+    color: #8a34ff;
+    border: 2px solid #8a34ff;
+    background-color: transparent;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-top: 2rem;
+  }
+  
+  .violet-button:hover {
+    background-color: #8a34ff;
+    color: white;
+  }
+  .login-title {
+    color: #8a34ff;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }

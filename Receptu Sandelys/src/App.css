@@ -42,3 +42,38 @@
 .read-the-docs {
   color: #888;
 }
+
+.header {
+  background-color: #8a34ff;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.nav-bar {
+  display: flex;
+  gap: 2rem; /* space between links */
+  justify-content: center;
+  align-items: center;
+  background-color: #8a34ff; /* purple background */
+  padding: 1rem 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.nav-bar a {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.nav-bar a:hover {
+  text-decoration: underline;
+  color: #ddd;
+}

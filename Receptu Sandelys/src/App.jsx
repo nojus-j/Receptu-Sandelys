@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -25,6 +25,11 @@ function App() {
               <Link to="/register">Register</Link>
             </li>
           </ul>
+        </nav> */}
+        <nav className="nav-bar">
+          <Link to="/">Home</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/register">Register</Link>
         </nav>
 
         <main>

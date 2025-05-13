@@ -83,7 +83,10 @@ const UnifiedRecipeSearch = () => {
   return (
       <div className="flex min-h-screen">
         {/* Sidebar: Contains only the filter controls */}
-        <aside className="w-84 bg-gray-500">
+        <aside aside className="w-84" style={{
+           backgroundColor: "#fbf8c0",
+           border: "3px solid #8a34ff" 
+           }}>
           <h2 className="text-xl text-black font-bold mb-4">Filters</h2>
           <FilterRecipeSlider
               sliderValues={sliderValues}
@@ -95,8 +98,8 @@ const UnifiedRecipeSearch = () => {
           />
         </aside>
         {/* Main Content: Contains the search bar, button, and recipe results */}
-        <main className="flex-1 p-4">
-          <h2 className="filter-title">Recipe Search</h2>
+        <main className="flex-1 p-4" style={{border: "3px solid #8a34ff"}}>
+          <h2 className="filter-title"></h2>
           <SearchBar ingredients={ingredients} setIngredients={setIngredients} />
           <div className="text-center mt-4">
             <button className="confirm-button" onClick={handleSearch}>
